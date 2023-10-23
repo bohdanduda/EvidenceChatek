@@ -43,4 +43,28 @@ public class Main {
 
         return peopleCounter;
     }
+
+    public static void getEmptyCottages() {
+        int cottageIndex = 0;
+        List<Integer> emptyCottages = new ArrayList<Integer>();
+
+        while (cottageIndex < Cottages.size()) {
+            int peopleCounter = 0;
+
+            for (int person : Cottages.get(cottageIndex)) {
+                peopleCounter += person;
+            }
+
+            if (peopleCounter == 0) {
+                emptyCottages.add(cottageIndex);
+            }
+
+            cottageIndex++;
+        }
+
+        System.out.println("Volné chatky:");
+        for (int cottageNumber : emptyCottages) {
+            System.out.println("Chata " + (cottageNumber + 1));
+        }
+    }
 }
