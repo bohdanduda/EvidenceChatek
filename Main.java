@@ -9,10 +9,12 @@ public class Main {
 
 
     static int cottageCount;
-    static int cottageCapacity = 4;
+    static int cottageCapacity;
 
     public static void main(String[] args) {
-        System.out.println("SPRÁVA CHATEK");
+        getCottages();
+
+        getUserInterface();
     }
 
     public static void getCottages() {
@@ -129,6 +131,81 @@ public class Main {
 
             Cottages.get(cottageNumber - 1)[i] = 0;
             counter++;
+        }
+    }
+
+    public static void getUserInterface() {
+        System.out.println("SPRÁVA CHATEK\n");
+
+        System.out.println("\nCo si přejete udělat?");
+        System.out.println("1 - Vypsat obsazenost chatek");
+        System.out.println("2 - Přidat lidi do chatky");
+        System.out.println("3 - Odebrat lidi z chatky");
+        System.out.println("4 - Vypsat celkový počet ubytovaných lidí");
+        System.out.println("5 - Vypsat seznam prázdných chatek");
+        System.out.println("0 - Konec\n");
+        int usersChoice = scanner.nextInt();
+        System.out.println();
+        if (usersChoice < 0 || usersChoice > 5) {
+            System.out.println("Zadejte validní odpověď v rozsahu 0-5!");
+
+            getUserInterface();
+        }
+
+        if (usersChoice == 1) {
+            System.out.print("Zadejte číslo chatky: ");
+            int cottageNumber = scanner.nextInt();
+            System.out.println("V chatě " + cottageNumber + " zbývá " + getCottageAvailability(cottageNumber) + " volných míst...");
+
+            returnToMenu();
+        }
+        if (usersChoice == 2) {
+            System.out.print("Zadejte číslo chatky: ");
+            int cottageNumber = scanner.nextInt();
+
+            System.out.print("Zadejte počet lidí: ");
+            int numberOfPeople = scanner.nextInt();
+
+            addPeopleToCottage(numberOfPeople, cottageNumber);
+
+            returnToMenu();
+        }
+        if (usersChoice == 3) {
+            System.out.print("Zadejte číslo chatky: ");
+            int cottageNumber = scanner.nextInt();
+
+            System.out.print("Zadejte počet lidí: ");
+            int numberOfPeople = scanner.nextInt();
+
+            removePeopleFromCottage(numberOfPeople, cottageNumber);
+
+            returnToMenu();
+        }
+        if (usersChoice == 4) {
+            System.out.println("Celkový počet ubytovaných lidí je: " + getPeopleCount());
+
+            returnToMenu();
+        }
+        if (usersChoice == 5) {
+            getEmptyCottages();
+
+            returnToMenu();
+        }
+
+        if (usersChoice == 0) {
+            System.out.println("Nashledanou...");
+            System.exit(0);
+        }
+    }
+
+    public static void returnToMenu() {
+        System.out.println("\nKlikněte na Enter pro návrat do menu...");
+        try {
+            System.in.read();
+            scanner.nextLine();
+
+            getUserInterface();
+        } catch (Exception e) {
         }
     }
 }
