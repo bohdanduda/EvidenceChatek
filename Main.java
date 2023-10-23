@@ -9,7 +9,7 @@ public class Main {
 
 
     static int cottageCount;
-    static int cottageCapacity;
+    static int cottageCapacity = 4;
 
     public static void main(String[] args) {
         System.out.println("SPRÁVA CHATEK");
@@ -29,8 +29,7 @@ public class Main {
         }
     }
 
-    public static int getPeopleCount()
-    {
+    public static int getPeopleCount() {
         int cottageIndex = 0;
         int peopleCounter = 0;
 
@@ -76,5 +75,33 @@ public class Main {
         }
 
         return cottageCapacity - peopleCounter;
+    }
+
+    public static void addPeopleToCottage(int numberOfPeople, int cottageNumber) {
+        int peopleCounter = 0;
+
+        for (int person : Cottages.get(cottageNumber - 1)) {
+            peopleCounter += person;
+        }
+
+        if (numberOfPeople > (cottageCapacity - peopleCounter)) {
+            System.out.println("Chata nemá místo pro tolik lidí!");
+
+            System.exit(0);
+        }
+
+        int counter = 0;
+        for (int i = 0; i < Cottages.get(cottageNumber - 1).length; i++) {
+            if (Cottages.get(cottageNumber - 1)[i] == 1) {
+                continue;
+            }
+
+            if (counter >= numberOfPeople) {
+                return;
+            }
+
+            Cottages.get(cottageNumber - 1)[i] = 1;
+            counter++;
+        }
     }
 }
