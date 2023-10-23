@@ -67,4 +67,14 @@ public class Main {
             System.out.println("Chata " + (cottageNumber + 1));
         }
     }
+
+    public static int getCottageAvailability(int cottageNumber) {
+        int peopleCounter = 0;
+
+        for (int person : Cottages.get(cottageNumber - 1)) {
+            peopleCounter += person;
+        }
+
+        return cottageCapacity - peopleCounter;
+    }
 }
