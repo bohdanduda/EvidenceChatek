@@ -104,4 +104,31 @@ public class Main {
             counter++;
         }
     }
+
+    public static void removePeopleFromCottage(int numberOfPeople, int cottageNumber) {
+        int peopleCounter = 0;
+        for (int person : Cottages.get(cottageNumber - 1)) {
+            peopleCounter += person;
+        }
+
+        if (numberOfPeople > (peopleCounter)) {
+            System.out.println("Nemůžete odebrat víc lidí než je v chatě!");
+
+            System.exit(0);
+        }
+
+        int counter = 0;
+        for (int i = 0; i < Cottages.get(cottageNumber - 1).length; i++) {
+            if (Cottages.get(cottageNumber - 1)[i] == 0) {
+                continue;
+            }
+
+            if (counter >= numberOfPeople) {
+                return;
+            }
+
+            Cottages.get(cottageNumber - 1)[i] = 0;
+            counter++;
+        }
+    }
 }
