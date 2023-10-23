@@ -28,4 +28,19 @@ public class Main {
             Cottages.add(cottage);
         }
     }
+
+    public static int getPeopleCount()
+    {
+        int cottageIndex = 0;
+        int peopleCounter = 0;
+
+        while (cottageIndex < Cottages.size()) {
+            for (int person : Cottages.get(cottageIndex)) {
+                peopleCounter += person;
+            }
+            cottageIndex++;
+        }
+
+        return peopleCounter;
+    }
 }
